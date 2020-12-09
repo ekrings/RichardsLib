@@ -1,7 +1,7 @@
 from app import app
 from flask import render_template, flash, redirect, url_for
 from app import db
-from app.forms import CreatePostForm
+#from app.forms import CreatePostForm
 from app.models import User, Post, Forum, Reply
 
 
@@ -15,6 +15,9 @@ def forums():
     forumList = Forum.query.all()
     return render_template('forums.html', forumList=forumList)
 
+@app.route('/contact')
+def contact():
+    return render_template('contact.html', title= 'Contact')
 
 @app.route('/forum/<book_title>',  methods=['GET', 'POST'])
 def forum(book_title):
