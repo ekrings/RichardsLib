@@ -19,7 +19,7 @@ def forums():
 def contact():
     return render_template('contact.html', title= 'Contact')
 
-@app.route('/forum/<book_title>',  methods=['GET', 'POST'])
+@app.route('/forumHome/<book_title>',  methods=['GET', 'POST'])
 def forum(book_title):
     forum = Forum.query.filter_by(book_title=book_title).first()
 
