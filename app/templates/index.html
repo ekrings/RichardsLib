@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block content %}
+{% block app_content %}
 <div class="text-center">
     <h1>Welcome to Laura E. Richard's Library</h1>
     <p>We are a small seasonal library, that promotes the love of books!</p>
@@ -11,6 +11,10 @@
     </div>
     <!--- carousel --->
 
+    <div class="container-fluid">
+     <div class="row">
+         <div class="col-8">
+             <div style="display: block; margin-left: auto; margin-right: auto;">
     <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active">
@@ -35,5 +39,9 @@
   </a>
   </div>
 </div>
+</div>
+         </div>
+     </div>
+    </div>
 
 {% endblock %}

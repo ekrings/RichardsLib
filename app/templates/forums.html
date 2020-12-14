@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block app_content %}
+
+<h1 class="ml-3">Book Forums</h1>
+<!------------------------------------COOL MODAL FORM START------------------------>
+<div class="modal fade" id="modalForumForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Create Post</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+        <form action="" method="post" novalidate>
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.book_title.label }}<br>
+            {{ form.book_title(size=32) }}<br>
+            {% for error in form.book_title.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.author.label }}<br>
+            {{ form.author(size=32) }}<br>
+            {% for error in form.author.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <button id="postsubmit">{{ form.submit() }}</button>
+
+    </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="text-center">
+  <a href="" class="btn btn-primary btn-rounded mb-4" data-toggle="modal" data-target="#modalForumForm">Create Forum</a>
+</div>
+<!------------------------------------COOL MODAL FORM END------------------------>
+
+{% for forum in forumList %}
+
+    <div class="ml-3"><p>
+        <a href="{{ url_for('forum', book_title=forum.book_title) }}">{{ forum.book_title }}</a>
+        by {{ forum.author }}<br>
+        Forum started by {{ forum.user.name }} on {{ forum.timestamp }}
+    </p>
+    </div>
+    {% endfor %}
+    <p id="result"></p>
+
+
+{% endblock %}
+
+{% block scripts %}
+{{super()}}
+<script type="text/javascript">
+  var $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+
+
+    $(document).ready(function() {
+    $("#update").click(function () {
+        alert("test working!!!")
+    });
+
+});
+
+
+    $(document).ready(function() {
+    $.getJSON($SCRIPT_ROOT + '/_processforum', {
+      }, function(data) {
+      var temp = "";
+      for(var i =0; i < data.result.length; i++ ){
+        temp = temp + "<div class=\"ml-3\"><p><a href=\"/forum/" + data.result[i].title + "\")>" + data.result[i].title + "</a></div>";
+
+      }
+        $('#result').html(temp);
+          });
+      });
+
+</script>
+{% endblock %}

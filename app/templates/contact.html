@@ -1,11 +1,62 @@
 {% extends "base.html" %}
 
-{% block content %}
+{% block app_content %}
 <br>
     <h1 class="text-center">Contact Us!</h1>
 <br>
     <p class="text-center">(207) 371-9995 <br> or <br> lauraerichardslibrary@gmail.com</p>
     <img src="static/images/libChair-5453.jpg" class="mx-auto d-block" alt="..." width=800>
+<br><br>
+
+<div class="row">
+                <div class="col-12">
+                    <form method="POST" action="https://formspree.io/lauraerichardslibrary@gmail.com">
+
+                        <div class="row">
+                            <div class="col-sm-6 col-12 mx-auto">
+                                <input class="formInput w-100 rounded" type="text" name="firstName" placeholder="First Name">
+                            </div>
+                        </div>
+
+                        <br>
+
+                        <div class="row">
+                            <div class="col-sm-6 col-12 mx-auto">
+                                <input class="formInput w-100 rounded" type="text" name="lastName" placeholder="Last Name">
+                            </div>
+                        </div>
+
+                        <br>
+                        <div class="row">
+                            <div class="col-sm-6 col-12 mx-auto text-center">
+                                <input class="formInput w-100 rounded" type="email" name="email" placeholder="Email">
+                            </div>
+                        </div>
+
+                        <br>
+
+                        <div class="row">
+                            <div class="col-sm-6 col-12 mx-auto text-center">
+                                <textarea class="formMessage formInput w-100 rounded" name="message" placeholder="Message"></textarea>
+                            </div>
+                        </div>
+
+                        <br>
+                        <br>
+
+                        <div class="row">
+                            <div class="col-12 mx-auto text-center">
+                                <button class="mb-5 btn btn-icBlue w-25" type="submit">Send</button>
+                            </div>
+                        </div>
+
+                        <br>
+
+                    </form>
+                </div>
+            </div>
+
+
 
 
 {% endblock %}

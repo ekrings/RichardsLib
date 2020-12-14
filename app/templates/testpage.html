@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block app_content %}
+
+<h1>jQuery Test</h1>
+  <button id="update">update</button>
+  <button id="ajaxtest">AJAX test</button>
+<h3 id="result"></h3>
+{% endblock %}
+
+
+{% block scripts %}
+{{super()}}
+<script type="text/javascript">
+  var $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+
+
+    $(document).ready(function() {
+    $("#update").click(function () {
+        alert("test working!!!")
+    });
+
+});
+    $(document).ready(function() {
+       $("#ajaxtest").click(function () {
+    $.getJSON($SCRIPT_ROOT + '/_test', {
+      }, function(data) {
+      var temp = "<ul>";
+      for(var i =0; i < data.result.length; i++ ){
+
+        temp = temp + "<li>" + data.result[i].title + "</li>\n";
+
+      }
+      temp = temp + "</ul>"
+        $('#result').html("Test message: "+ temp);
+          });
+      });
+    });
+
+</script>
+{% endblock %}
+
