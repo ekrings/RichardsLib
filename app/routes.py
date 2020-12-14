@@ -55,7 +55,7 @@ def forums():
         forum = Forum(userID=current_user.id, book_title=form.book_title.data, author=form.author.data)
         db.session.add(forum)
         db.session.commit()
-        flash('Congratulations, you are now a registered user!')
+        flash('Forum Created.')
         final_form = ForumForm()
 
         return redirect(url_for('forums'))
@@ -75,7 +75,7 @@ def createforum():
         db.session.add(user)
         db.session.commit()
 
-        flash('Created new Post: {}'.format(
+        flash('Created new forum: {}'.format(
             form.book_title.data))
         final_form = ForumForm()
         render_template('createforum.html', title='New Post', form=final_form)
@@ -113,10 +113,10 @@ def reply(book_title, title):
         #db.session.add(p2r)
         #db.session.commit()
 
-        flash('Reply Successful')
+        flash('Reply posted')
         final_form = ReplyForm()
         render_template('reply.html', title='Reply', book=book, post=post, form=final_form)
-        session['book'] = Forum.query.filter_by(book_title=book_title).first()
+        #session['book'] = Forum.query.filter_by(book_title=book_title).first()
         return redirect(url_for('forum', book_title=book_title))
     return render_template('reply.html',title='Reply', book=book, post=post, form=form)
 
@@ -183,7 +183,7 @@ def register():
         #return redirect(url_for('index'))
     form = RegistrationForm()
     if form.validate_on_submit():
-        user = User(name=form.name.data)
+        user = User(name=form.name.data, email=form.email.data)
         user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()

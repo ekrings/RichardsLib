@@ -3,6 +3,7 @@
 
 {% block app_content %}
     <script type="text/javascript">
+        /*
     var $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
   $(function() {
     var update_post = function(e) {
@@ -19,6 +20,8 @@
         update_post(e);
     });
   });
+  */
+
 </script>
 <!------------------------------------COOL MODAL FORM START------------------------>
 <div class="modal fade" id="modalPostForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
@@ -76,7 +79,17 @@
         {{ pst.content }}<br>
          Posted by {{ pst.user.name }} at {{ pst.timestamp }}
         </p>
-    </div>
+        </div>
+        {% for reply in pst.replies %}
+            <br>
+            <div class="ml-5">
+                <i>{{ reply.content }}</i>
+                 <p>reply from {{reply.user.name}} at {{reply.timestamp}}</p>
+
+
+            </div>
+        {% endfor %}
+
     <div class="ml-3">
         <a href="{{ url_for('reply', book_title=pst.forum.book_title, title=pst.title)}}">reply</a>
     </div>

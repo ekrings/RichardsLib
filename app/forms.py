@@ -37,15 +37,21 @@ class ReplyForm(FlaskForm):
 
 class RegistrationForm(FlaskForm):
     name = StringField('Username', validators=[DataRequired()])
+    email = StringField('Email', validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired()])
     password2 = PasswordField(
         'Repeat Password', validators=[DataRequired(), EqualTo('password')])
     submit = SubmitField('Register')
 
-    def validate_username(self, username):
+    def validate_username(self, name):
         user = User.query.filter_by(name=name.data).first()
         if user is not None:
             raise ValidationError('Please use a different username.')
+
+    def validate_email(self, email):
+        user = User.query.filter_by(email=email.data).first()
+        if user is not None:
+            raise ValidationError('Please use a different email address.')
 
     def validate_email(self, email):
         user = User.query.filter_by(email=email.data).first()
